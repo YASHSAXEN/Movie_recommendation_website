@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+
+    <title>Bookmark Movies</title>
+    <link rel="icon"
+        href="https://images.freecreatives.com/wp-content/uploads/2017/10/flat-clapperboard-icon_1063-38.jpg">
+    <!-- Loading third party fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+    <link href="{{url_for('static',filename='fonts/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+
+    <!-- Loading main css file -->
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--[if lt IE 9]>
+
+	if lt IE 9]>
+		<script src="js/ie-support/html5.js"></script>
+		<script src="js/ie-support/respond.js"></script>
+		<![endif]-->
+    <style>
+        #s {
+            width: 450px;
+            position: relative;
+            top: 37px;
+            left: 56px;
+        }
+
+        #b {
+            position: relative;
+            left: 18px;
+            top: 37px;
+        }
+
+        #branding {
+            float: left;
+            position: relative;
+            top: 33px;
+        }
+
+        .col-md-6 {
+            width: 25%;
+        }
+
+        .yash {
+            background-color: white;
+            box-shadow: none;
+            color: black;
+            width: 247.5px;
+            height: 78px;
+            font-size: 16px;
+            position: relative;
+            top: -30px;
+
+        }
+
+        .btn.btn-link {
+            position: relative;
+            top: -78px;
+            left: 410px;
+            height: 34px;
+            background-color: #ff9331;
+            box-shadow: none;
+            color: black;
+            border: 1px solid #ffaa3c;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .main-content {
+            background-color: black;
+        }
+
+        .site-footer {
+            background-color: black;
+            color: white;
+        }
+
+        .yash {
+            background-color: white;
+            box-shadow: none;
+            color: black;
+            width: 247.5px;
+            height: 78px;
+        }
+
+        .remove {
+            position: relative;
+            left: 70px;
+            top: -30px;
+
+        }
+
+        #date {
+            position: relative;
+            top: -25px;
+            left: 73px;
+            font-size: 17px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div id="site-content">
+        <header class="site-header">
+            <div class="container">
+                <a href="/profile" id="branding">
+                    <img src="{{url_for('static',filename='images/logo.png')}}" alt="" class="logo">
+                    <div class="logo-copy">
+                        <h1 class="site-title">{{session.username}}</h1>
+                        <small class="site-description">Tagline goes here</small>
+                    </div>
+                </a> <!-- #branding -->
+
+                <form action="/review" method="post" class="search-form">
+                    <input list="se" name="sn" placeholder="Choose Movie" id="s">
+                    <datalist id="se">
+                        {% for movie in movie_list %}
+                        <option value="{{movie}}">
+                            {% endfor %}
+                    </datalist>
+                    <button type="submit" id="b"><i class="fa fa-search"></i></button>
+                </form>
+                <div class="main-navigation">
+                    <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+                    <ul class="menu">
+                        <li class="menu-item"><a href="/index">Home</a></li>
+                        <li class="menu-item"><a href="/about">About</a></li>
+                        <li class="menu-item current-menu-item"><a href="/review">Movie reviews</a></li>
+                        <li class="menu-item"><a href="/contact">Contact</a></li>
+                        <li class="menu-item"><a href="/logout">Logout</a></li>
+                    </ul> <!-- .menu -->
+
+                </div> <!-- .main-navigation -->
+
+                <div class="mobile-navigation"></div>
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="container">
+                <div class="page">
+                    <div class="breadcrumbs">
+                        <a href="/index">Home</a>
+                        <span>Searched Movies</span>
+                    </div> <!-- .row -->
+                    <h2>Searched Movies</h2>
+                    <div class="movie-list">
+                        {% for i in range(y) %}
+                        <div class="movie">
+                            <form action="/bookmark" method="post">
+                                <figure class="movie-poster"><img src="{{bookmarked_movies_posterpath[i]}}" alt="#">
+                                </figure>
+                                <div class="movie-title">
+                                    <span id="date">{{search_date[i]}}</span>
+                                </div>
+                                <div class="movie-title">
+                                    <button type="submit" value="{{bookmarked_movies_name[i]}}" name="selm"
+                                        class="yash">{{bookmarked_movies_name[i]}}</button>
+                                </div>
+
+                            </form>
+                            <form action="/history" method="post">
+                                <div class="movie-title">
+                                    <button type="submit" value="{{bookmarked_movies_name[i]}}" name="remove"
+                                        class="remove">Remove</button>
+                                </div>
+                            </form>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+    </div> <!-- .container -->
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
+        </div> <!-- .container -->
+    </footer>
+    </div>
+    <!-- Default snippet for navigation -->
+
+
+
+    <script src="{{url_for('static',filename='js/jquery-1.11.1.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/plugins.js')}}"></script>
+    <script src="{{url_for('static',filename='js/app.js')}}"></script>
+
+</body>
+
+</html>

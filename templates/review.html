@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+
+	<title>Movie Review | Review</title>
+	<link rel="icon"
+		href="https://images.freecreatives.com/wp-content/uploads/2017/10/flat-clapperboard-icon_1063-38.jpg">
+	<!-- Loading third party fonts -->
+	<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+	<link href="{{url_for('static',filename='fonts/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+
+	<!-- Loading main css file -->
+	<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+
+	<!--[if lt IE 9]>
+		<script src="js/ie-support/html5.js"></script>
+		<script src="js/ie-support/respond.js"></script>
+		<![endif]-->
+	<style>
+		.btn.btn-secondary.btn-lg {
+			padding: 5px;
+			position: relative;
+			top: -2px;
+			background-color: #d6881c;
+		}
+
+		#s {
+			width: 400px;
+			position: relative;
+			top: 43px;
+			left: 52px;
+		}
+
+		#b {
+			position: relative;
+			left: 12px;
+			top: 43px;
+		}
+
+		#branding.logo {
+			margin-right: 10px;
+			position: relative;
+			top: -11px;
+		}
+
+		#branding {
+			float: left;
+			position: relative;
+			top: 33px;
+		}
+
+		.logo-copy {
+			position: relative;
+			top: 12px;
+		}
+
+		.colophon {
+			position: relative;
+			top: 19px;
+			color: gray;
+		}
+
+		.site-footer {
+			background-color: black;
+		}
+
+		body {
+			background-color: black;
+		}
+
+		.box {
+			position: relative;
+			top: -54px;
+			left: 178px;
+			margin: 0px auto;
+			width: 600px;
+		}
+
+		.yash {
+			background-color: white;
+			box-shadow: none;
+			color: black;
+		}
+	</style>
+
+</head>
+
+
+<body>
+
+
+	<div id="site-content">
+		<header class="site-header">
+			<div class="container">
+				<a href="/profile" id="branding">
+					<img src="{{url_for('static',filename='images/logo.png')}}" alt="" class="logo">
+					<div class="logo-copy">
+						<h1 class="site-title">{{session.username}}</h1>
+						<small class="site-description">Tagline goes here</small>
+					</div>
+				</a> <!-- #branding -->
+				<form action="/review" method="post" class="search-form">
+					<input list="se" name="sn" placeholder="Choose Movie" id="s">
+					<datalist id="se">
+						{% for movie in movie_list %}
+						<option value="{{movie}}">
+							{% endfor %}
+					</datalist>
+					<button type="submit" id="b"><i class="fa fa-search"></i></button>
+				</form>
+				<div class="main-navigation">
+					<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+					<ul class="menu">
+						<li class="menu-item"><a href="/index">Home</a></li>
+						<li class="menu-item"><a href="/about">About</a></li>
+						<li class="menu-item current-menu-item"><a href="/review">Movie reviews</a></li>
+						<li class="menu-item"><a href="/contact">Contact</a></li>
+						<li class="menu-item"><a href="/logout">Logout</a></li>
+					</ul> <!-- .menu -->
+				</div> <!-- .main-navigation -->
+
+				<div class="mobile-navigation"></div>
+			</div>
+		</header>
+		<main class="main-content">
+			<div class="container">
+				<div class="page">
+					<div class="breadcrumbs">
+						<a href="/index">Home</a>
+						<span>Movie Review</span>
+					</div>
+					<form action="/review" method="post">
+						<div class="filters">
+							<select name="gn" id="#" placeholder="Choose Category">
+								{% for genre in lists %}
+								<option value="{{genre}}">{{genre}}</option>
+								{% endfor %}
+							</select>
+							<button type="submit" class="btn btn-secondary btn-lg">Search</button>
+						</div>
+					</form>
+
+
+					<div class="movie-list">
+						{% for d in data.items %}
+
+						<div class="movie">
+							<form action="/review" method="post">
+								<figure class="movie-poster"><img src="{{d.poste_path}}" name="selm" alt="#"></figure>
+								<div class="movie-title">
+									<!-- <input  type="submit" value="{{d.movie_name}}"name="selm"> -->
+									<button type="submit" value="{{d.movie_name}}" name="selm"
+										class="yash">{{d.movie_name}}</button>
+								</div>
+							</form>
+						</div>
+
+						{% endfor %}
+					</div>
+					<!-- .movie-list 
+					<a href="{{prev}}"><button type="submit" class="prev">prev</button></a>
+					<a href="{{next}}"></a><button type="submit" class="next">next</button></a>-->
+
+				</div> <!-- .container -->
+		</main>
+		<div class="box">
+			{% for page_num in data.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
+			{% if page_num %}
+			{% if data.page == page_num %}
+			<a class=" btn btn-info mb-4" href="{{url_for('review',page=page_num)}}">{{page_num}}</a>
+			{% else %}
+			<a class=" btn btn-outline-info mb-4" href="{{url_for('review',page=page_num)}}">{{page_num}}</a>
+			{% endif %}
+			{% else %}
+			...
+			{% endif %}
+			{% endfor %}
+		</div>
+		<footer class="site-footer">
+			<div class="container">
+				<div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
+			</div> <!-- .container -->
+		</footer>
+	</div>
+	<!-- Default snippet for navigation -->
+
+
+
+	<script src="{{url_for('static',filename='js/jquery-1.11.1.min.js')}}"></script>
+	<script src="{{url_for('static',filename='js/plugins.js')}}"></script>
+	<script src="{{url_for('static',filename='js/app.js')}}"></script>
+
+</body>
+
+</html>

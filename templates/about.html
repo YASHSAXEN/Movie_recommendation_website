@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+
+	<title>Movie Review | About</title>
+	<link rel="icon"
+		href="https://images.freecreatives.com/wp-content/uploads/2017/10/flat-clapperboard-icon_1063-38.jpg">
+
+	<!-- Loading third party fonts -->
+	<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+	<link href="{{url_for('static',filename='fonts/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+
+	<!-- Loading main css file -->
+	<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+
+	<!--[if lt IE 9]>
+		<script src="js/ie-support/html5.js"></script>
+		<script src="js/ie-support/respond.js"></script>
+		<![endif]-->
+
+	<style>
+		#s {
+			width: 450px;
+			position: relative;
+			top: 37px;
+			left: 56px;
+		}
+
+		#b {
+			position: relative;
+			left: 18px;
+			top: 37px;
+		}
+
+		#branding {
+			float: left;
+			position: relative;
+			top: 33px;
+		}
+
+		.p {
+			font-size: 19px;
+		}
+
+		.social-links .google-plus {
+			background-color: #000000;
+		}
+
+		.social-links .pinterest {
+			background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+		}
+	</style>
+</head>
+
+
+<body>
+
+
+	<div id="site-content">
+		<header class="site-header">
+			<div class="container">
+				<a href="/profile" id="branding">
+					<img src="{{url_for('static',filename='images/logo.png')}}" alt="" class="logo">
+					<div class="logo-copy">
+						<h1 class="site-title">{{session.username}}</h1>
+						<small class="site-description">Tagline goes here</small>
+					</div>
+				</a> <!-- #branding -->
+				<form action="/about" method="post" class="search-form">
+					<input list="se" name="sn" placeholder="Choose Movie" id="s">
+					<datalist id="se">
+						{% for movie in movie_list %}
+						<option value="{{movie}}">
+							{% endfor %}
+					</datalist>
+					<button type="submit" id="b"><i class="fa fa-search"></i></button>
+				</form>
+
+				<div class="main-navigation">
+					<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+					<ul class="menu">
+						<li class="menu-item"><a href="/index">Home</a></li>
+						<li class="menu-item current-menu-item"><a href="/about">About</a></li>
+						<li class="menu-item"><a href="/review">Movie reviews</a></li>
+						<li class="menu-item"><a href="/contact">Contact</a></li>
+						<li class="menu-item"><a href="/logout">Logout</a></li>
+					</ul> <!-- .menu -->
+
+
+				</div> <!-- .main-navigation -->
+
+				<div class="mobile-navigation"></div>
+			</div>
+		</header>
+		<main class="main-content">
+			<div class="container">
+				<div class="page">
+					<div class="breadcrumbs">
+						<a href="/index">Home</a>
+						<span>About us</span>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<figure><img
+									src="https://thumbs.dreamstime.com/b/big-open-clapper-board-movie-reel-cinema-icon-set-movie-film-elements-flat-design-cinema-movie-time-flat-icons-f-95500226.jpg"
+									alt="figure image">
+							</figure>
+						</div>
+						<div class="col-md-8">
+							<p class="leading">Our Movie Website Overview</p>
+							<p class="p">In the Home page the top section shows the recently released Bollywood movies
+								and the bottom section shows the recent released Hollywood movies and the movies shown
+								in the top changes time to time.<br>
+								<br>
+								In The Movie Reviews Section user can search the movies belonging to a particular genre.
+								<br><br>
+								In the Contact Section user can give your feedback for the site after filling the form.
+								<br><br>
+								The user also search the movie by the movie name using the search bar provided on the
+								top of the each page.
+							</p>
+						</div>
+					</div>
+
+					<h2 class="section-title">Our Team</h2>
+					<div class="row">
+
+						<div class="col-md-3">
+							<div class="team">
+								<figure class="team-image"><img
+										src="{{url_for('static',filename='yashprofilephoto2.jpg')}}" alt=""></figure>
+								<h2 class="team-name">Yash Saxena</h2>
+								<small class="team-title">Team Leader</small>
+								<div class="social-links">
+									<a href="https://www.linkedin.com/in/yash-saxena-1935bb226" target="_blank"
+										class="facebook"><i class="fa fa-linkedin"></i></a>
+									<!-- <a href="https://twitter.com/sandeepsingh7_8?t=RiIORblYV0H32tve2I28cw&s=08"
+										target="_blank" class="twitter"><i class="fa fa-twitter"></i></a> -->
+									<a href="https://github.com/YASHSAXEN" target="_blank" class="google-plus"><i
+											class="fa fa-github"></i></a>
+									<!-- <a href="https://instagram.com/saxena_yash2104?igshid=ZDdkNTZiNTM= " target="_blank"
+										class="pinterest"><i class="fa fa-instagram"></i></a> -->
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="team">
+								<figure class="team-image"><img
+										src="{{url_for('static',filename='nikita.jpg')}}" alt=""></figure>
+								<h2 class="team-name">Nikita kabir</h2>
+								<small class="team-title">Team Member</small>
+								<div class="social-links">
+									<a href="https://www.linkedin.com/in/nikita-kabir-a9a1b6229" target="_blank"
+										class="facebook"><i class="fa fa-linkedin"></i></a>
+									<!-- <a href="https://twitter.com/sandeepsingh7_8?t=RiIORblYV0H32tve2I28cw&s=08"
+										target="_blank" class="twitter"><i class="fa fa-twitter"></i></a> -->
+									<a href="#" target="_blank" class="google-plus"><i
+											class="fa fa-github"></i></a>
+									<!-- <a href="https://instagram.com/sandeep_7.8?igshid=NTA5ZTk1NTc=" target="_blank"
+										class="pinterest"><i class="fa fa-instagram"></i></a> -->
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="team">
+								<figure class="team-image"><img src="{{url_for('static',filename='pranjul.jpg')}}"
+										alt=""></figure>
+								<h2 class="team-name">Pranjul Shukla</h2>
+								<small class="team-title">Team Member</small>
+								<div class="social-links">
+									<a href="https://www.linkedin.com/in/pranjul-shukla-8805ba226" target="_blank"
+										class="facebook"><i class="fa fa-linkedin"></i></a>
+									<!-- <a href="https://twitter.com/sandeepsingh7_8?t=RiIORblYV0H32tve2I28cw&s=08"
+										target="_blank" class="twitter"><i class="fa fa-twitter"></i></a> -->
+									<a href="https://github.com/PranjulShukl" target="_blank" class="google-plus"><i
+											class="fa fa-github"></i></a>
+									<!-- <a href="https://instagram.com/sandeep_7.8?igshid=NTA5ZTk1NTc=" target="_blank"
+										class="pinterest"><i class="fa fa-instagram"></i></a> -->
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="team">
+								<figure class="team-image"><img src="{{url_for('static',filename='sandeep.jpg')}}"
+										alt=""></figure>
+								<h2 class="team-name">Sandeep Kumar</h2>
+								<small class="team-title">Team Member</small>
+								<div class="social-links">
+									<a href="https://www.linkedin.com/in/sandeep-kumar-717b35226" target="_blank"
+										class="facebook"><i class="fa fa-linkedin"></i></a>
+									<!-- <a href="https://twitter.com/sandeepsingh7_8?t=RiIORblYV0H32tve2I28cw&s=08"
+										target="_blank" class="twitter"><i class="fa fa-twitter"></i></a> -->
+									<a href="https://github.com/sandeeparyan001" target="_blank" class="google-plus"><i
+											class="fa fa-github"></i></a>
+									<!-- <a href="https://instagram.com/sandeep_7.8?igshid=NTA5ZTk1NTc=" target="_blank"
+										class="pinterest"><i class="fa fa-instagram"></i></a> -->
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div> <!-- .container -->
+		</main>
+		<footer class="site-footer">
+			<div class="container">
+				<div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
+			</div> <!-- .container -->
+		</footer>
+	</div>
+	<!-- Default snippet for navigation -->
+
+
+
+	<script src="{{url_for('static',filename='js/jquery-1.11.1.min.js')}}"></script>
+	<script src="{{url_for('static',filename='js/plugins.js')}}"></script>
+	<script src="{{url_for('static',filename='js/app.js')}}"></script>
+
+</body>
+
+</html>

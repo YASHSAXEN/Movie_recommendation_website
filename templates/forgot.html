@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="icon"
+        href="https://images.freecreatives.com/wp-content/uploads/2017/10/flat-clapperboard-icon_1063-38.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet"
+        href="{{url_for('static',filename='fonts/material-design-iconic-font/css/material-design-iconic-font.min.css')}}">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        #username {
+            width: 375px;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            position: relative;
+            top: 50px;
+            left: -248px;
+            width: 390px;
+            height: 59px;
+        }
+
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            position: relative;
+            top: 30px;
+            left: -248px;
+            width: 390px;
+            height: 50px;
+        }
+
+        .wrapper {
+            background-image: url("{{url_for('static',filename='signupformimage.jpg')}}");
+
+        }
+
+        .form-wrapper label {
+            margin-bottom: 9px;
+            display: block;
+            color: black;
+        }
+
+        .form-control {
+            border-color: black;
+        }
+
+        #login {
+            /* color: #337ab7; */
+            text-decoration: none;
+            position: relative;
+            left: 230px;
+            top: -40px;
+            color: black;
+        }
+
+        form {
+            width: 50%;
+            padding-left: 45px;
+            position: relative;
+            top: 41px;
+            left: -290px;
+        }
+
+        .h {
+            position: relative;
+            top: -200px;
+            left: 153px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="h">
+            <h1> Movie Recommendation </h1>
+        </div>
+        <div class="inner">
+            <form action="/forgot" method="post">
+                <h3>Change Password</h3>
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">Username</label>
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                    <label for="">New Password</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <div class="form-wrapper">
+                    <label for="">Confirm Password</label>
+                    <input type="password" class="form-control" name="cpassword">
+                </div>
+                <button type="submit">Change</button>
+
+            </form>
+
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{message}}
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
