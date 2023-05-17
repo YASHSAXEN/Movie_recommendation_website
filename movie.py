@@ -78,7 +78,6 @@ def fetch_poster(movieid):
     keys = params["api_key"]
     response = requests.get(
         f"https://api.themoviedb.org/3/find/{movieid}?api_key={keys}&language=en-US&external_source=imdb_id")
-        # f"https://api.themoviedb.org/3/find/{movieid}?api_key=9ec4fcf6ee16570a83538ebb62923432&language=en-US&external_source=imdb_id")
     data = response.json()
     if len(data["movie_results"]) != 0 and flag == False:
         poster_path = data["movie_results"][0]["poster_path"]
@@ -92,7 +91,6 @@ def fetch_trailer_link(movieid):
     status = True
     keys = params["api_key"]
     response = requests.get(f"http://api.themoviedb.org/3/movie/{movieid}/videos?api_key={keys}")
-        # f"http://api.themoviedb.org/3/movie/{movieid}/videos?api_key=9ec4fcf6ee16570a83538ebb62923432")
     data = response.json()
     try:
         flag = True
