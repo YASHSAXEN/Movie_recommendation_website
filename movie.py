@@ -22,17 +22,13 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/blogdatabase'
-app.config['SQLALCHEMY_DATABASE_URI'] = params["database"]
-# app.config['SECRET_KEY'] = 'yashsaxenarnhy@1234' 
+app.config['SQLALCHEMY_DATABASE_URI'] = params["database"] 
 app.config['SECRET_KEY'] = params["secret_key"]
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-# app.config['MAIL_USERNAME'] = 'ashusaxena210403@gmail.com'
 app.config['MAIL_USERNAME'] = params["mail_id"]
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-# app.config['MAIL_PASSWORD'] = "otwdxzpxhchexive" 
 app.config['MAIL_PASSWORD'] = params["mail_pass"]
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 mail = Mail(app)
